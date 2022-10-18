@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>A4</title>
+    <style>
+        body {
+            background-color: rgb(196, 251, 232);
+            color: rgb(50, 80, 92);
+            align-items: center;
+            text-align: center;
+        }
+
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+
+    <!-- including axios library of js for http request -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<!--
+</head>
+    <script>
+    function initMap() {
+        var location = {
+            zoom: 8,
+            center: { lat: 21.1232, lng: 79.0515 },
+        }
+        var map = new google.maps.Map(document.getElementById("map"), location);
+        // ● Created a marker and point it to VNIT.
+        // ● Changed the icon of the marker.
+        // ● Added a caption(message) to the marker, so that if user clicks on the marker
+        // caption(message) is displayed
+        addmarkers({
+            coords: { lat: 21.1232, lng: 79.0515 },
+            iconImage: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
+            content: '<h2>VNIT</h2>'
+        });
+        //Get request to get all the markers from the database
+        axios.get("/getMarkers").then((res) => {
+            let locations = res.data;
+            locations.forEach(element => {
+                const pos = { lat: element.lat, lng: element.lng };
+                addmarkers({ coords: pos });
+            });
+        }).catch((err) => {
+            console.log(err);
+        });
+        // ● Dynamically add markers to Google map on a user click.
+        google.maps.event.addListener(map, 'click',
+            function (event) {
+                addmarkers({ coords: event.latLng });
+                const loc = { lat: event.latLng.lat(), lng: event.latLng.lng() };
+                //Post request to add the newly clicked marker into the database
+                axios.post("/addMarker", loc).error((err) => {
+                    console.log(err);
+                });
+            });
+        // Add marker function
+        function addmarkers(props) {
+            var marker = new google.maps.Marker({
+                position: props.coords,
+                map: map,
+            });
+            if (props.iconImage) {
+                marker.setIcon(props.iconImage);
+            }
+            if (props.content) {
+                var caption = new google.maps.InfoWindow({
+                    content: props.content
+                });
+                marker.addListener('click', function () {
+                    caption.open(map, marker);
+                });
+            }
+        }
+    }
+</script> -->
+
+<body>
+    <h3>charts</h3>
+    <p><b>HostelBlock piechart</b></p>
+    <iframe width="360" height="222" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vR2unmJdHbvtJI6_9YCqB6i4D3QuM7F_xvnUNue6H9fECzqhjklUPM2J-UZeseB8CS4wH4cb70RrJF0/pubchart?oid=2005231961&amp;format=interactive"></iframe>
+    <p>years column chart</p>
+    <iframe width="322" height="199" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vR2unmJdHbvtJI6_9YCqB6i4D3QuM7F_xvnUNue6H9fECzqhjklUPM2J-UZeseB8CS4wH4cb70RrJF0/pubchart?oid=872038229&amp;format=interactive"></iframe>
+    <div id="map">
+    </div>
+    
+    
+   <!-- <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApx6pFCY0XlU4mSWReK9AOs8BdMhLoLco&callback=initMap">
+        </script> -->
+    
+    
+</body>
+</html>
